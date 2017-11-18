@@ -6,6 +6,8 @@ Allowing easy text to speech using Web Speech API.
 
 ### What does this do? 
 This javascript plugin allows you to take advantage of the speech capabilities of a web browser to speak written text (text-to-speech) out loud, this can be used to add a spoken narrative to your web game, give a more immersive experience to your web-app, build your own assistant or add accessibility to your site.
+[
+#### [Checkout a Demo](jakebown.com/labs/speak-demo/)
 
 ### Setting Speak up in your Project
 This plugin does **not** require jQuery in order to work, simply include `speak.js` in your html file(s).
