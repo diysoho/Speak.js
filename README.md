@@ -10,7 +10,7 @@ This javascript plugin allows you to take advantage of the speech capabilities o
 ### Setting Speak up in your Project
 This plugin does **not** require jQuery in order to work, simply include `speak.js` in your html file(s).
 
-### Let's Talk
+### Parameters
 
 You can set the following speech parameters in Speech.
 
@@ -23,14 +23,73 @@ You can set the following speech parameters in Speech.
 | rate             | int    | 100   | This value is a percentage |
 | volume           | int    | 100   | This value is a percentage |
 
-#### Set and Get
+#### Set and Get Parameters
 
 ```javascript
   speak.setPitch(100);
   speak.getPitch(); //Returns 100;
   
-  // You can also chain function when setting like so:
+  // You can also chain functions when setting like so:
   
   speak.setPitch(50).setRate(55).setVolume(60);
   
+  speak.getVoices(); // Returns array.
+  speak.setVoice('Daniel');
+  
 ```
+
+### Let's Talk
+
+> say({string|object}, {function->callback}, {string->event}); 
+
+```javascript
+  //Voice available in Google Chrome, will default to first option in none supported browsers.
+  speak.setVoice('Google UK English Female');
+  speak.say('Hello World.');
+  
+  // Again, we can chain:
+  speak.say('Hello World.').say('How are you?');
+  
+```
+
+We can specify a callback on a particular event: <br/>`onend`, `onboundary`, `onerror`, `onmark`, `onstart` and `onpause`.
+
+Let's say we wanted to add a class upon speaking we would do:
+
+```javascript
+  speak.say('I will now add a class to the body', function() { 
+    $('body').addClass('new_class'); 
+  }, 'onstart');
+```
+
+If we wanted to chain multiple speech outputs that has different voices, pitches, events and delays then we would pass an object to the `say()` function like so:
+
+```javascript
+speak.say(
+  [
+    {
+      text: 'Two plus two is four, minus three is one quick maff.', 
+      pitch: 5,
+	  rate: 120, 
+      voice: 'Alex',
+      callback: function(e) { console.log(e); }, 
+      event: 'onstart' 
+    },
+    {
+      text: 'Take off your jacket, mans not hot.', 
+      pitch: 100,
+      volume: 60,
+      delay: 3000, //ms
+      voice: 'Google UK English Female',
+      callback: function(e) { alert('Done!'); }, 
+      event: 'onend' 
+    }
+  ]
+);
+
+```
+
+## Fin.
+If you like this repo then follow me on twitter @jakebown1
+
+
